@@ -33,4 +33,5 @@ main section article{
     min-height:400px;
     border-radius: 10px;
     position: relative;
+    background-color: yellow;
 }
