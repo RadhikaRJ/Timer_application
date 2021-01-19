@@ -27,21 +27,27 @@ var watch = {
  timer : null,
  now :0,
  tick: function(){
-     watch.now++;
+     watch.now++;//increments microsecond count
+     //10 microseconds = 1 second
      var remain = watch.now;
 
-     //calculate seconds in terms of hours
-     var hours = Math.floor( remain/3600);
-     //calculate seconds remained after hours are extracted from it
-     remain -= hours * 3600;
+     //calculate micro-seconds in terms of hours
+     var hours = Math.floor( remain/36000);
+     //calculate microseconds left after hours are extracted from it
+     remain -= hours * 36000;
      
-     //calculate minutes after hours are extracted from the remaining seconds
-     var mins = Math.floor(remain/60);
-     //calculate seconds remaining after minutes are extracted
-     remain -= mins *60;
+     //calculate minutes after hours are extracted from the remaining microseconds
+     var mins = Math.floor(remain/600);
+     //calculate micro-seconds remaining after minutes are extracted
+     remain -= mins *600;
 
-    //assign remaining seconds to secs variable 
-     var secs = remain;
+    //Calculate seconds from remaining microseconds 
+     var secs = Math.floor(remain/10);
+     remain -= secs*10;
+
+     //assign remaining microseconds to microsecs variable
+     var microsecs = remain;
+
 
      //Display update
      if(hours<10) {
@@ -53,14 +59,17 @@ var watch = {
      if(secs<10){
          secs="0"+secs;
      }
+     if(microsecs<10){
+         microsecs = "0"+microsecs;
+     }
 
      //display in HTML
-     watch.timeDisplay.innerHTML = hours + ":" + mins + ":" + secs;
+     watch.timeDisplay.innerHTML = hours + ":" + mins + ":" + secs + ":" + microsecs;
 
  },
 
  start : function(){
-     watch.timer = setInterval(watch.tick,1000);
+     watch.timer = setInterval(watch.tick,100);
      watch.btnStartStop.innerHTML = "Stop";
      watch.btnStartStop.removeEventListener("click",watch.start);
      watch.btnStartStop.addEventListener("click",watch.stop);
