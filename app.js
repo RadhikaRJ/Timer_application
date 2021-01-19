@@ -1,4 +1,4 @@
-//watch is Javascript object that has the initialisation as well as all the control functions defined in it.
+//watch is  object data type in Javascript that has the initialisation as well as all the control functions defined in it.
 //Execution begins when window.addEventListener has completed the load action & gives a call to the watch.init function
 //Watch. initi function, based on user action, performs the start & stop actions.
 var watch = { 
